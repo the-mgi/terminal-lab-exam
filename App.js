@@ -1,21 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createDrawerNavigator} from "@react-navigation/drawer";
+import {DRAWER_SCREENS} from "./utils/constants";
+import CarBrandListComponent from "./components/car-brand-list/car-brand-list.component";
+import CarListAndCarDetails from "./components/car-list-screen/car-list-screen.component";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+	const Drawer = createDrawerNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	return (
+		<NavigationContainer>
+			<Drawer.Navigator initialRouteName={DRAWER_SCREENS.CAR_LIST}>
+				<Drawer.Screen name={DRAWER_SCREENS.CAR_LIST} component={CarListAndCarDetails}/>
+				<Drawer.Screen name={DRAWER_SCREENS.CAR_BRAND_LIST} component={CarBrandListComponent}/>
+			</Drawer.Navigator>
+		</NavigationContainer>
+	);
+}
